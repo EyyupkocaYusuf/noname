@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f9dce9">
+<title>Zehra'ya ❤️ | Yusuf'tan</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ min-height:100vh;
+ padding:15px;
+ display:grid;
+ place-items:center;
+ overflow-x:hidden;
+ font-family:Georgia,serif;
+ color:#793750;
+ background:
+ radial-gradient(circle at 15% 15%,#fff 0,transparent 30%),
+ linear-gradient(135deg,#fff0f6,#f4c6dc,#ffeaf2);
+}
+
+.card{
+ width:min(100%,580px);
+ min-height:590px;
+ padding:55px 28px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ position:relative;
+ overflow:hidden;
+ border:1px solid white;
+ border-radius:32px;
+ background:#ffffffdf;
+ box-shadow:0 25px 80px #a844702b;
+}
+
+.card:before,.card:after{
+ content:"";
+ position:absolute;
+ width:180px;height:180px;
+ border-radius:50%;
+ background:#f5c5d955;
+ filter:blur(15px);
+}
+.card:before{top:-100px;left:-80px}
+.card:after{bottom:-100px;right:-80px}
+
+.content{
+ position:relative;
+ z-index:2;
+ width:100%;
+ animation:appear .7s ease;
+}
+
+@keyframes appear{
+ from{opacity:0;transform:translateY(18px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+ font-size:clamp(30px,8vw,46px);
+ line-height:1.2;
+ font-weight:normal;
+ color:#a0446b;
+ margin:18px 0;
+}
+
+p{
+ font-size:19px;
+ line-height:1.8;
+ max-width:460px;
+ margin:0 auto;
+}
+
+.heart{
+ font-size:75px;
+ animation:heartbeat 1.5s infinite;
+ display:inline-block;
+}
+
+@keyframes heartbeat{
+ 0%,100%{transform:scale(1)}
+ 15%{transform:scale(1.15)}
+ 30%{transform:scale(1)}
+ 45%{transform:scale(1.1)}
+}
+
+.kicker{
+ font:12px Arial,sans-serif;
+ letter-spacing:4px;
+ color:#c16d91;
+ text-transform:uppercase;
+ margin-top:20px;
+}
+
+.actions{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap;
+ margin-top:35px;
+}
+
+button{
+ border:0;
+ border-radius:40px;
+ padding:15px 25px;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+ transition:transform .35s ease,opacity .35s ease;
+}
+
+button:active{filter:brightness(.95)}
+
+.primary{
+ background:linear-gradient(135deg,#ec8caf,#c94d7e);
+ color:white;
+ box-shadow:0 8px 22px #ce618d40;
+}
+
+.secondary{
+ background:#f5e0e9;
+ color:#a44d70;
+}
+
+.progress{
+ position:absolute;
+ top:22px;
+ left:22px;
+ right:22px;
+ display:flex;
+ gap:6px;
+ z-index:3;
+}
+
+.progress span{
+ height:4px;
+ flex:1;
+ border-radius:10px;
+ background:#f0dce5;
+}
+
+.progress .done{background:#d65e91}
+
+.counter{
+ position:absolute;
+ right:25px;
+ top:36px;
+ font:12px Arial;
+ color:#b67a95;
+}
+
+.small{
+ font:13px Arial;
+ color:#bd809a;
+ margin-top:24px;
+ line-height:1.7;
+}
+
+.float{
+ position:fixed;
+ bottom:-60px;
+ z-index:10;
+ pointer-events:none;
+ animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+ to{
+  transform:translateY(-115vh) rotate(45deg);
+  opacity:0;
+ }
+}
+
+/* Kutlama ekranı */
+
+.celebration{
+ animation:appear 1s ease;
+}
+
+.music-player{
+ position:fixed;
+ z-index:20;
+ bottom:12px;
+ left:12px;
+ width:220px;
+ padding:8px;
+ border-radius:14px;
+ background:#fff;
+ box-shadow:0 5px 25px #963e6725;
+ display:none;
+}
+
+.music-player iframe{
+ display:block;
+ width:100%;
+ height:112px;
+ border:0;
+ border-radius:9px;
+}
+
+.music-label{
+ font:11px Arial;
+ color:#a34b70;
+ padding:5px;
+}
+
+.music-link{
+ display:block;
+ text-align:center;
+ padding:8px 4px;
+ color:#a34b70;
+ font:12px Arial,sans-serif;
+ text-decoration:none;
+}
+
+.music-link:hover{
+ text-decoration:underline;
+}
+
+@media(max-width:480px){
+ .card{
+  min-height:calc(100svh - 30px);
+  padding:50px 20px;
+  border-radius:25px;
+ }
+ p{font-size:17px}
+ .music-player{
+  width:170px;
+  bottom:8px;
+  left:8px;
+ }
+ .music-player iframe{height:96px}
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">1 / 8</div>
+
+<section class="content" id="screen">
+
+<div class="heart">💗</div>
+<div class="kicker">Yusuf'tan Zehra'ya</div>
+
+<h1>Sana söylemek istediğim bir şey var...</h1>
+
+<p>
+Bazı duyguları anlatmak kolay değildir.
+Ben de sana söylemek istediklerimi
+küçük bir yolculuğa dönüştürmek istedim.
+</p>
+
+<div class="actions">
+<button class="primary" id="start">
+Yolculuğa başlayalım ❤️
+</button>
+</div>
+
+<div class="small">Her şey kalpten gelen birkaç cümleyle başladı...</div>
+
+</section>
+</main>
+
+<!-- Yalın - Ki Sen müzik oynatıcısı -->
+<div class="music-player" id="musicPlayer">
+ <div class="music-label">♫ Yalın – Ki Sen</div>
+ <div id="youtubePlayer"></div>
+</div>
+
+<script>
+
+// 8 AŞAMALI ROMANTİK HİKÂYE
+
+const stages=[
+
+{
+ emoji:"✨",
+ tag:"Güzel bir başlangıç",
+ title:"İyi ki hayatıma girdin Zehra.",
+ text:"Hayatta bazı karşılaşmaların neden yaşandığını ilk anda anlayamayız. Zaman geçtikçe bazı insanların sıradan bir tanışıklıktan çok daha fazlası olduğunu fark ederiz. Sen benim için böyle bir anlam taşıyorsun."
+},
+
+{
+ emoji:"🌹",
+ tag:"Sende sevdiğim şey",
+ title:"Gülüşünün bende başka bir yeri var.",
+ text:"İnsan bazen birinin gülüşünde, bütün günün yorgunluğunu unutturacak bir huzur bulabiliyor. Senin gülüşün de benim için tam olarak böyle. Küçük bir anı bile güzelleştirebiliyor."
+},
+
+{
+ emoji:"💫",
+ tag:"Birlikte geçen anlar",
+ title:"Seninle zamanın nasıl geçtiğini anlamıyorum.",
+ text:"Bazen saatlerce konuşsak da söyleyeceklerim bitmiyor. Çünkü mesele ne konuştuğumuz değil, kiminle konuştuğumuz. Seninle paylaştığım en sıradan anlar bile benim için değerli."
+},
+
+{
+ emoji:"🦋",
+ tag:"Biraz heyecan",
+ title:"Adını görünce bile mutlu oluyorum.",
+ text:"Bunu sana anlatırken bile yüzümde bir tebessüm oluşuyor. Günün ortasında gelen küçücük bir mesajın, insanın bütün ruh hâlini değiştirebildiğini seninle daha iyi anladım."
+},
+
+{
+ emoji:"🌙",
+ tag:"Sana dair",
+ title:"Seni tanımak bana iyi geliyor.",
+ text:"Bir insanı güzel yapan yalnızca görünüşü değil; düşünceleri, kalbi, hayata bakışı ve hissettirdikleridir. Seni tanıdıkça bunların her birini daha fazla merak ediyorum."
+},
+
+{
+ emoji:"💞",
+ tag:"Bir dilek",
+ title:"Seninle güzel anılar biriktirmek istiyorum.",
+ text:"Birlikte gülebildiğimiz, birbirimizi anlayabildiğimiz, zor zamanlarda birbirimize destek olabildiğimiz bir hikâyemiz olsun istiyorum. Kusursuz değil, gerçek ve güzel bir hikâye..."
+},
+
+{
+ emoji:"💌",
+ tag:"Kalbimden geçen",
+ title:"Artık bunu saklamak istemiyorum.",
+ text:"Sana karşı hissettiklerim zamanla daha da anlam kazandı. Seni daha yakından tanımak, hayatında güzel bir yer edinmek ve sana kendimi en içten hâlimle göstermek istiyorum."
+},
+
+{
+ emoji:"❤️",
+ tag:"En özel soru",
+ title:"Zehra, benimle çıkar mısın?",
+ text:"Sana yalnızca güzel sözler söylemek değil, bu sözlerin arkasında durmak da istiyorum. Birbirimizi tanıyacağımız, güleceğimiz, birlikte büyüyeceğimiz güzel bir başlangıca ne dersin?"
+}
+
+];
+
+let step=0;
+let noCount=0;
+
+const screen=document.getElementById("screen");
+const progress=document.getElementById("progress");
+const counter=document.getElementById("counter");
+
+
+// İLERLEME ÇUBUĞU
+
+function drawProgress(){
+ progress.innerHTML="";
+
+ for(let i=0;i<8;i++){
+  const bar=document.createElement("span");
+
+  if(i<=step){
+   bar.classList.add("done");
+  }
+
+  progress.appendChild(bar);
+ }
+}
+
+
+// EKRANLARI OLUŞTUR
+
+function render(){
+
+ const s=stages[step];
+
+ counter.textContent=(step+1)+" / 8";
+
+ drawProgress();
+
+ let buttons="";
+
+ if(step<7){
+
+  buttons=`
+   <button class="primary" id="next">
+    Bir sonraki ❤️
+   </button>
+  `;
+
+ }else{
+
+  const yesScale=1+(noCount*0.22);
+  const noScale=Math.max(0.25,1-(noCount*0.15));
+
+  buttons=`
+
+   <button
+    class="primary"
+    id="yes"
+    style="
+     transform:scale(${yesScale});
+     font-size:${16+noCount*2}px;
+    "
+   >
+    Evet ❤️
+   </button>
+
+   ${noCount<5?`
+
+    <button
+     class="secondary"
+     id="no"
+     style="
+      transform:scale(${noScale});
+      font-size:${Math.max(8,16-noCount*1.5)}px;
+      padding:${Math.max(4,15-noCount*2)}px ${Math.max(6,25-noCount*3)}px;
+     "
+    >
+     Hayır 🙈
+    </button>
+
+   `:""}
+
+  `;
+ }
+
+ let hint="";
+
+ if(step===7){
+
+  const hints=[
+   "Cevabını merakla bekliyorum... ❤️",
+   "Biraz daha düşünsen? 🥺",
+   "Seninle çok güzel şeyler yaşayabiliriz. 💗",
+   "Kalbim hâlâ aynı cevabı bekliyor. 🌹",
+   "Belki bu kez kalbimin sesini dinlersin? ✨",
+   "Artık sadece bir cevap kaldı. ❤️"
+  ];
+
+  hint=hints[Math.min(noCount,5)];
+
+ }
+
+ screen.innerHTML=`
+
+  <div class="heart">${s.emoji}</div>
+
+  <div class="kicker">${s.tag}</div>
+
+  <h1>${s.title}</h1>
+
+  <p>${s.text}</p>
+
+  <div class="actions">
+   ${buttons}
+  </div>
+
+  <div class="small">
+   ${step===7?hint:"Yusuf'tan, tüm içtenliğiyle..."}
+  </div>
+
+ `;
+
+ document.getElementById("next")?.addEventListener("click",()=>{
+  step++;
+  render();
+
+  if(step===7){
+   burst(25);
+  }
+ });
+
+ document.getElementById("yes")?.addEventListener("click",accepted);
+
+ document.getElementById("no")?.addEventListener("click",()=>{
+
+  noCount++;
+
+  render();
+
+  if(noCount===5){
+   burst(30);
+  }
+
+ });
+
+}
+
+
+// EVET CEVABI: ÖZEL KUTLAMA
+
+function accepted(){
+
+ progress.style.display="none";
+ counter.style.display="none";
+
+ screen.innerHTML=`
+
+ <div class="celebration">
+
+  <div class="heart">💖</div>
+
+  <div class="kicker">
+   ZEHRA & YUSUF · YENİ BİR BAŞLANGIÇ
+  </div>
+
+  <h1>İyi ki evet dedin Zehra!</h1>
+
+  <p>
+   Şu an yüzümde kocaman bir gülümseme var.
+   Bugün benim için çok güzel bir anıya dönüştü.
+   Bundan sonra birlikte yaşayacağımız nice güzel
+   anının ilk sayfası olsun.
+  </p>
+
+  <div style="
+   font-size:35px;
+   margin:25px 0;
+   letter-spacing:8px;
+  ">
+   🌹 💗 🥂 💗 🌹
+  </div>
+
+  <h2 style="font-weight:normal;color:#bd5983">
+   Hikâyemiz şimdi başlıyor...
+  </h2>
+
+  <div class="actions">
+   <button class="primary" id="celebrate">
+    Kutlamaya devam! 🎉
+   </button>
+  </div>
+
+  <div class="small">
+   Her güzel hikâyenin bir başlangıcı vardır.
+   Benim bugünümün en güzel başlangıcı sensin.
+   <br><br>
+   Sevgiyle, Yusuf ❤️
+  </div>
+
+ </div>
+
+ `;
+
+ document.getElementById("celebrate").onclick=()=>{
+  burst(120);
+  balloons(35);
+ };
+
+ burst(100);
+ balloons(30);
+
+}
+
+
+// KALP ANİMASYONU
+
+function heart(){
+
+ const el=document.createElement("div");
+
+ el.className="float";
+
+ el.textContent=[
+  "💗","💕","♥","♡","✨","🌸","💖"
+ ][Math.floor(Math.random()*7)];
+
+ el.style.left=Math.random()*100+"vw";
+ el.style.fontSize=(18+Math.random()*25)+"px";
+ el.style.animationDuration=(5+Math.random()*5)+"s";
+
+ document.body.appendChild(el);
+
+ setTimeout(()=>el.remove(),11000);
+
+}
+
+
+// BALON ANİMASYONU
+
+function balloons(count){
+
+ const colors=["🎈","💗","💕","🎈","💖"];
+
+ for(let i=0;i<count;i++){
+
+  setTimeout(()=>{
+
+   const el=document.createElement("div");
+
+   el.className="float";
+
+   el.textContent=colors[
+    Math.floor(Math.random()*colors.length)
+   ];
+
+   el.style.left=Math.random()*100+"vw";
+   el.style.fontSize=(25+Math.random()*35)+"px";
+   el.style.animationDuration=(6+Math.random()*5)+"s";
+
+   document.body.appendChild(el);
+
+   setTimeout(()=>el.remove(),12000);
+
+  },i*80);
+
+ }
+
+}
+
+
+// TOPLU KALP YAĞMURU
+
+function burst(count){
+
+ for(let i=0;i<count;i++){
+  setTimeout(heart,i*35);
+ }
+
+}
+
+
+// ARKA PLANDA HAFİF KALPLER
+
+setInterval(heart,1000);
+
+
+// BAŞLAT
+
+document.getElementById("start").addEventListener("click",()=>{
+
+ step=0;
+
+ render();
+
+
+});
+
+
+// YOUTUBE MÜZİK OYNATICISI
+// Kullanıcı butona bastıktan sonra oluşturulur.
+
+function startMusic(){
+
+ const player=document.getElementById("youtubePlayer");
+ const musicPlayer=document.getElementById("musicPlayer");
+
+ musicPlayer.style.display="block";
+
+ player.innerHTML=`
+  <iframe
+   src="https://www.youtube-nocookie.com/embed/gw_kNDHntbY?autoplay=1&controls=1&rel=0"
+   title="Yalın - Ki Sen"
+   referrerpolicy="strict-origin-when-cross-origin"
+   allow="autoplay; encrypted-media; picture-in-picture"
+   allowfullscreen>
+  </iframe>
+
+  <a
+   class="music-link"
+   href="https://www.youtube.com/watch?v=gw_kNDHntbY"
+   target="_blank"
+   rel="noopener noreferrer">
+   Şarkıyı YouTube'da aç ♫
+  </a>
+ `;
+
+}
+
+</script>
+</body>
+</html>
